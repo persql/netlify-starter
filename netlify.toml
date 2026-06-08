@@ -1,0 +1,21 @@
+# PerSQL on Netlify — starter Blueprint.
+#
+# The three PerSQL vars are declared under [template.environment] so the
+# "Deploy to Netlify" button prompts for them. Get the values from
+# https://netlify.persql.com/connect (provisions a database + token).
+
+[build]
+  command = "npm install"
+  functions = "netlify/functions"
+  publish = "public"
+
+# Serve the function at the site root.
+[[redirects]]
+  from = "/"
+  to = "/.netlify/functions/visit"
+  status = 200
+
+[template.environment]
+  PERSQL_API_URL = "PerSQL API base URL (https://api.persql.com)"
+  PERSQL_DATABASE = "Your PerSQL database path: <namespace>/<db-slug>"
+  PERSQL_TOKEN = "A PerSQL token scoped to that database (from netlify.persql.com/connect)"
